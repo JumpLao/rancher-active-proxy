@@ -5,7 +5,8 @@ ENV DEBUG=false RAP_DEBUG="info"
 ARG VERSION_RANCHER_GEN="artifacts/master"
 
 WORKDIR /root/
-RUN apk add --no-cache nano ca-certificates unzip wget bash openssl py-pip
+RUN apk add --no-cache nano ca-certificates unzip wget bash openssl
+RUN apk --update --no-cache add python2 augeas gcc python2-dev musl-dev libffi-dev openssl-dev py2-pip
 RUN wget https://github.com/certbot/certbot/archive/v0.22.0.tar.gz && tar -xzf ./v0.22.0.tar.gz
 WORKDIR /root/certbot-0.22.0
 RUN pip install ./
