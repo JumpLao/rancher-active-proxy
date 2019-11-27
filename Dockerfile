@@ -4,8 +4,10 @@ MAINTAINER Adrien M amaurel90@gmail.com
 ENV DEBUG=false RAP_DEBUG="info" 
 ARG VERSION_RANCHER_GEN="artifacts/master"
 
-RUN apk add --no-cache nano ca-certificates unzip wget certbot bash openssl
-
+RUN apk add --no-cache nano ca-certificates unzip wget bash openssl py-pip
+RUN wget https://github.com/certbot/certbot/archive/v0.22.0.tar.gz && tar -xzf ./v0.22.0.tar.gz
+WORKDIR /root/certbot-0.22.0
+RUN pip install ./
 # Install Forego & Rancher-Gen-RAP
 ADD https://github.com/jwilder/forego/releases/download/v0.16.1/forego /usr/local/bin/forego
 
