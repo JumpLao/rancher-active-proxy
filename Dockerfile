@@ -6,14 +6,13 @@ ARG VERSION_RANCHER_GEN="artifacts/master"
 
 WORKDIR /root/
 RUN apk add --no-cache nano ca-certificates unzip wget bash openssl
-RUN apk --update --no-cache add python2 augeas gcc python2-dev musl-dev libffi-dev openssl-dev py2-pip
+RUN apk --update --no-cache add python3 augeas gcc python3-dev musl-dev libffi-dev openssl-dev py3-pip
 RUN wget https://github.com/certbot/certbot/archive/v0.22.0.tar.gz && tar -xzf ./v0.22.0.tar.gz
 WORKDIR /root/certbot-0.22.0
 RUN pip install ./
 # Install Forego & Rancher-Gen-RAP
 ADD https://github.com/jwilder/forego/releases/download/v0.16.1/forego /usr/local/bin/forego
-
-RUN wget "https://gitlab.com/adi90x/rancher-gen-rap/builds/$VERSION_RANCHER_GEN/download?job=compile-go" -O /tmp/rancher-gen-rap.zip \
+RUN wget "https://gitlab.com/nattaphat.la/rancher-gen-rap/builds/$VERSION_RANCHER_GEN/download?job=compile-go" -O /tmp/rancher-gen-rap.zip \
 	&& unzip /tmp/rancher-gen-rap.zip -d /usr/local/bin \
 	&& chmod +x /usr/local/bin/rancher-gen \
 	&& chmod u+x /usr/local/bin/forego \

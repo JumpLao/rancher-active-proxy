@@ -1,0 +1,3 @@
+FROM jumplao/rancher-active-proxy
+
+RUN apk add --no-cache nginx>1.22.3
